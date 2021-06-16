@@ -1,0 +1,13 @@
+{{#if posts}}
+<ol class="post-list">
+<!-- posts array -->
+{{#each posts as |post|}}
+  <ul>
+      {{> post-details post }}
+  </ul>
+{{/each}}
+</ol>
+{{else}}
+<h2>This site has no posts yet!</h2>
+<h3>Why don't you register and make one?</h3>
+{{/if}}

@@ -1,0 +1,50 @@
+<div class="row">
+    <div class="col s12">
+        <div class="card horizontal">
+          <div class="card-stacked">
+            <a href="/post/{{id}}"><div class="card-title center-align">{{post.title}}</div></a>
+            <div class="card-content">
+              <p>{{post.body}}</p>
+            </div>
+            <div class="card-action nav-wrapper">
+              <span class="right">Posted By {{post.user.name}} On {{format_time post.date_created}}</span>
+              {{#if currentUser}}
+              <span class="left">
+                <a href="/post/edit/{{id}}" id="editPost">Edit or Delete Post</a>
+              </span>
+              {{/if}}
+            </div>
+          </div>
+        </div>
+    </div>
+</div>
+
+{{!Comment Section}}
+{{#if logged_in}}
+<div class="container center-align">
+    <div class="row">
+      <form class="col s12">
+        <div class="row">
+          <div class="input-field col s12">
+            <i class="fas fa-pencil-alt prefix"></i>
+            <textarea class="hide" id="post_id" value="{{post.id}}"></textarea>
+            <textarea id="comment_body" class="materialize-textarea"></textarea>
+            <label for="icon_prefix2">Write a comment here...</label>
+          </div>
+        </div>
+      </form>
+  </div>
+  <div class="row right-align">
+    <button class="btn waves-effect waves-light" type="submit" name="action"><span style="font-size: large">Submit</span>
+    <i class="right-align far fa-paper-plane"></i>
+  </button>
+  </div>
+</div>
+{{/if}}
+
+{{!Displays all comments}}
+{{#each post.comments as |postComments| }}
+{{> comment-details postComments}}
+{{/each}}
+
+<script src="/js/addComment.js"></script>
